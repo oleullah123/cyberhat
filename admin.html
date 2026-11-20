@@ -148,7 +148,9 @@ function listenChats() {
     const cur = chats.find(c => c.id === selected);
     if (cur && cur.unreadAdmin) updateDoc(doc(db, 'chats', cur.id), { unreadAdmin: false }).catch(() => {});
   }, (err) => {
-    $('list').innerHTML = '<div class="adm-empty">Access denied. Check firestore.rules and the admin email.</div>';
+    const d = document.createElement('div'); d.className = 'adm-empty';
+    d.textContent = 'Access denied (' + (err.code || 'error') + '). Signed in as: ' + (auth.currentUser && auth.currentUser.email) + ' | Firebase project: ' + firebaseConfig.projectId + ' | Check that Firestore Rules are Published in THIS project with this exact email.';
+    $('list').innerHTML = ''; $('list').appendChild(d);
     console.error(err);
   });
 }
