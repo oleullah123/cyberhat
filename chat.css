@@ -78,3 +78,6 @@ body.adm{background:var(--ink); color:var(--text-light); height:100vh; height:10
   .adm-back{display:inline-block;}
   .chat-msgs{height:340px;}
 }
+
+/* hidden attribute must always win over display:grid/flex rules */
+[hidden]{display:none !important;}
