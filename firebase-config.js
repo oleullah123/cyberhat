@@ -12,4 +12,4 @@ export const firebaseConfig = {
 
 // অ্যাডমিনের ইমেইল (Firebase Authentication-এ যে ইমেইলে অ্যাডমিন ইউজার বানাবেন)।
 // firestore.rules ফাইলেও একই ইমেইল দিতে হবে।
-export const ADMIN_EMAIL = "admin@cyberhat.top";
+export const ADMIN_EMAIL = "oleullah123@gmail.com";
