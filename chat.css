@@ -81,3 +81,14 @@ body.adm{background:var(--ink); color:var(--text-light); height:100vh; height:10
 
 /* hidden attribute must always win over display:grid/flex rules */
 [hidden]{display:none !important;}
+
+/* force readable colors in the visitor chat (even with browser dark mode / forced colors) */
+.chat-box{color:var(--text-dark); color-scheme:light;}
+.chat-send textarea{color:var(--text-dark); background:#fff; caret-color:var(--text-dark); -webkit-text-fill-color:var(--text-dark);}
+.chat-send textarea::placeholder{color:var(--muted-2); opacity:1; -webkit-text-fill-color:var(--muted-2);}
+.bubble.me, .bubble.me span, .bubble.me time{color:#fff;}
+.bubble.them, .bubble.them span, .bubble.them time{color:var(--text-dark);}
+/* admin keeps its dark theme */
+.adm .chat-send textarea{color:var(--text-light); background:var(--panel-2); caret-color:var(--text-light); -webkit-text-fill-color:var(--text-light);}
+.adm .chat-send textarea::placeholder{color:var(--muted); -webkit-text-fill-color:var(--muted);}
+.adm .bubble.them, .adm .bubble.them span, .adm .bubble.them time{color:var(--text-light);}
