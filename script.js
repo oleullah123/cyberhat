@@ -5,15 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const menu = document.querySelector('.mobile-menu');
   if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      menu.classList.toggle('open');
-      toggle.textContent = menu.classList.contains('open') ? '✕' : '☰';
-    });
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      menu.classList.remove('open');
-      toggle.textContent = '☰';
-    }));
+    const setMenu = (open) => {
+      menu.classList.toggle('open', open);
+      toggle.textContent = open ? '✕' : '☰';
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    window.addEventListener('resize', () => { if (window.innerWidth > 900) setMenu(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
   }
+
+  // Logo image: fall back to the built-in icon + text if logo.png is missing
+  document.querySelectorAll('.logo-img').forEach(img => {
+    const parent = img.parentElement;
+    const fail = () => parent.classList.add('no-logo-img');
+    img.addEventListener('error', fail);
+    if (img.complete && img.naturalWidth === 0) fail();
+  });
 
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
@@ -69,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const btn = form.querySelector('.submit-btn');
       const original = btn.textContent;
       btn.textContent = 'Message sent ✓';
-      btn.style.background = '#00A87D';
+      btn.style.background = '#0A3FC4';
       setTimeout(() => {
         form.reset();
         btn.textContent = original;

@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B0F19">
 <title>Services — Cyber Hat</title>
 <meta name="description" content="ERP, school management, POS, healthcare, HR and custom software services from Cyber Hat.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="logo.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="site-header">
   <nav class="nav">
-    <a href="index.html" class="logo">
-      <svg viewBox="0 0 32 32" fill="none"><path d="M16 3 L28 9.5 V22.5 L16 29 L4 22.5 V9.5 Z" stroke="#00D9A3" stroke-width="1.8"/><path d="M10 14 L16 10 L22 14 M10 14 V20 L16 24 L22 20 V14" stroke="#00D9A3" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    <a href="index.html" class="logo" aria-label="Cyber Hat — Home">
+      <img class="logo-img" src="logo.png" alt="" width="54" height="54" decoding="async">
+      <span class="logo-fallback" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 3 L28 9.5 V22.5 L16 29 L4 22.5 V9.5 Z" stroke="#3B8BFF" stroke-width="1.8"/><path d="M10 14 L16 10 L22 14 M10 14 V20 L16 24 L22 20 V14" stroke="#3B8BFF" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
       <span class="logo-word">CYBER<span>HAT</span></span>
     </a>
     <ul class="nav-links">
@@ -26,9 +30,9 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <a class="nav-cta desktop-only" href="contact.html">Get a Quote →</a>
-    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">☰</button>
   </nav>
-  <div class="mobile-menu">
+  <div class="mobile-menu" id="mobile-menu">
     <a href="index.html">Home</a>
     <a href="services.html" class="active">Services</a>
     <a href="work.html">Work</a>
@@ -165,7 +169,8 @@
     <div class="foot-grid">
       <div class="foot-col">
         <div class="foot-brand">
-          <svg width="26" height="26" viewBox="0 0 32 32" fill="none"><path d="M16 3 L28 9.5 V22.5 L16 29 L4 22.5 V9.5 Z" stroke="#00D9A3" stroke-width="1.8"/><path d="M10 14 L16 10 L22 14 M10 14 V20 L16 24 L22 20 V14" stroke="#00D9A3" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <img class="logo-img foot-logo" src="logo.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <span class="logo-fallback" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 32 32" fill="none"><path d="M16 3 L28 9.5 V22.5 L16 29 L4 22.5 V9.5 Z" stroke="#3B8BFF" stroke-width="1.8"/><path d="M10 14 L16 10 L22 14 M10 14 V20 L16 24 L22 20 V14" stroke="#3B8BFF" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
           <span class="logo-word">CYBER<span>HAT</span></span>
         </div>
         <p class="foot-desc">Custom ERP, school management, and business software — designed around how your organization actually runs.</p>

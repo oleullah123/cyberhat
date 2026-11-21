@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // অ্যাডমিন ইমেইল
+    function isAdmin() {
+      return request.auth != null
+          && request.auth.token.email == "oleullah123@gmail.com";
+    }
+
+    match /chats/{chatId} {
+      // ভিজিটর শুধু নিজের চ্যাট (chatId == তার anonymous uid) দেখতে/বানাতে পারে
+      allow read: if isAdmin() || (request.auth != null && request.auth.uid == chatId);
+
+      allow create: if request.auth != null
+        && request.auth.uid == chatId
+        && request.resource.data.keys().hasOnly(
+             ['name','org','phone','need','brief','createdAt','lastMessage','lastMessageAt','unreadAdmin'])
+        && request.resource.data.name is string && request.resource.data.name.size() <= 100
+        && request.resource.data.org is string && request.resource.data.org.size() <= 150
+        && request.resource.data.phone is string && request.resource.data.phone.size() <= 40
+        && request.resource.data.need is string && request.resource.data.need.size() <= 100
+        && request.resource.data.brief is string && request.resource.data.brief.size() <= 2000
+        && request.resource.data.unreadAdmin == true;
+
+      allow update: if isAdmin()
+        || (request.auth != null && request.auth.uid == chatId
+            && request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['lastMessage','lastMessageAt','unreadAdmin'])
+            && request.resource.data.unreadAdmin == true);
+
+      allow delete: if isAdmin();
+
+      match /messages/{messageId} {
+        allow read: if isAdmin() || (request.auth != null && request.auth.uid == chatId);
+
+        allow create: if request.resource.data.keys().hasOnly(['text','from','createdAt'])
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 2000
+          && (
+               (request.auth != null && request.auth.uid == chatId && request.resource.data.from == 'visitor')
+            || (isAdmin() && request.resource.data.from == 'admin')
+          );
+
+        allow update, delete: if isAdmin();
+      }
+    }
+  }
+}
